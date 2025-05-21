@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { Post } from '@/lib/types';
 import { api } from '@/lib/api';
 import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
 const QuillEditor = dynamic(() => import('./QuillEditor'), { ssr: false });
 
 const fetchPost = async (id: string) => {
@@ -26,6 +27,7 @@ const updatePost = async (post: Post) => {
 
 const RichTextEditor: React.FC = () => {
   const params = useParams();
+    const router = useRouter();
   const id = params.id as string;
   const queryClient = useQueryClient();
   const isUpdateMode = !!id;
@@ -53,6 +55,7 @@ const RichTextEditor: React.FC = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['post', id] });
       toast.success('Post updated successfully!');
+      router.push('/admin/posts');
     },
     onError: (error) => {
       console.error('Update error:', error);

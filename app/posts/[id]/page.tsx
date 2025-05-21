@@ -4,7 +4,6 @@ import { api } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Post } from "@/lib/types";
 import { ArrowLeft } from "lucide-react";

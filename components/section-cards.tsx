@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 import { api } from "@/lib/api"
 import { Album, Photo, Post, User, Totals } from "@/lib/types"
 import { Loader2 } from 'lucide-react'

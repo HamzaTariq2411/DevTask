@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 
 interface QuillEditorProps {
   content: string;
@@ -10,7 +12,7 @@ interface QuillEditorProps {
 
 const QuillEditor: React.FC<QuillEditorProps> = ({ content, setContent, initialContent }) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
-  const quillRef = useRef<any | null>(null);
+  const quillRef = useRef<Quill | null>(null);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -20,7 +22,6 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ content, setContent, initialC
   useEffect(() => {
     if (isClient && editorRef.current && !quillRef.current) {
       import('quill').then((module) => {
-        import('quill/dist/quill.snow.css');
         const Quill = module.default;
         if (editorRef.current) {
           quillRef.current = new Quill(editorRef.current as HTMLElement, {
@@ -38,16 +39,19 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ content, setContent, initialC
               ],
             },
           });
-          if (initialContent) {
+          if (initialContent && quillRef.current) {
             quillRef.current.root.innerHTML = initialContent;
           }
-          quillRef.current.on('text-change', () => {
-            setContent(quillRef.current.root.innerHTML);
-          });
+          if (quillRef.current) {
+            quillRef.current.on('text-change', () => {
+              setContent(quillRef.current!.root.innerHTML);
+            });
+          }
         }
       });
     }
   }, [isClient, initialContent, setContent]);
+
   useEffect(() => {
     if (quillRef.current && content !== quillRef.current.root.innerHTML) {
       quillRef.current.root.innerHTML = content;

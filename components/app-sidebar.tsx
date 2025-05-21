@@ -1,22 +1,10 @@
 "use client"
-
-import * as React from "react"
 import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
+  IconHome,
+  IconLayoutDashboard,
+  IconPencilPlus,
+  IconList,
   IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
 } from "@tabler/icons-react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -40,24 +28,23 @@ const data = {
     {
       title: "Home",
       url: "/",
-      icon: IconDashboard,
+      icon: IconHome,
     },
-     {
+    {
       title: "Dashboard",
       url: "/admin",
-      icon: IconDashboard,
+      icon: IconLayoutDashboard,
     },
     {
       title: "Create/Edit Post",
       url: "/admin/post/manage",
-      icon: IconListDetails,
+      icon: IconPencilPlus,
     },
     {
       title: "Posts",
       url: "/admin/posts",
-      icon: IconListDetails,
+      icon: IconList,
     },
-    
   ],
 }
 
