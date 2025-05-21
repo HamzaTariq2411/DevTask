@@ -27,7 +27,7 @@ const updatePost = async (post: Post) => {
 
 const RichTextEditor: React.FC = () => {
   const params = useParams();
-    const router = useRouter();
+  const router = useRouter();
   const id = params.id as string;
   const queryClient = useQueryClient();
   const isUpdateMode = !!id;
@@ -43,6 +43,8 @@ const RichTextEditor: React.FC = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       toast.success('Post created successfully!');
+      setTitle('');
+      setContent('');
     },
     onError: (error) => {
       console.error('Create error:', error);
@@ -55,6 +57,8 @@ const RichTextEditor: React.FC = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['post', id] });
       toast.success('Post updated successfully!');
+      setTitle('');
+      setContent('');
       router.push('/admin/posts');
     },
     onError: (error) => {
@@ -115,8 +119,8 @@ const RichTextEditor: React.FC = () => {
         {createMutation.isPending || updateMutation.isPending
           ? 'Saving...'
           : isUpdateMode
-          ? 'Update'
-          : 'Create'}
+            ? 'Update'
+            : 'Create'}
       </button>
     </div>
   );
